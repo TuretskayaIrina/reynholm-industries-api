@@ -59,6 +59,40 @@ const getUsersById = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+// обновить пользователя
+const updateUser = (req, res, next) => {
+  const {
+    avatar,
+    firstName,
+    lastName,
+    birthday,
+    profession,
+    relocation,
+    adress,
+  } = req.body;
+  User.findByIdAndUpdate(req.params.id, {
+    avatar,
+    firstName,
+    lastName,
+    birthday,
+    profession,
+    relocation,
+    adress,
+  }, {
+    new: true,
+    runValidators: true,
+  })
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        throw new ValidationError('Ошибка валидации');
+      }
+    })
+    .then((user) => {
+      res.status(200).send({ data: user });
+    })
+    .catch((err) => next(err));
+};
+
 // удаляет пользователя по id
 const deleteUser = (req, res, next) => {
   User.findByIdAndRemove(req.params.id)
@@ -76,5 +110,6 @@ module.exports = {
   getAllUsers,
   createUser,
   getUsersById,
+  updateUser,
   deleteUser,
 };

@@ -4,6 +4,7 @@ const router = require('express').Router();
 const { getAllUsers } = require('../controllers/user');
 const { createUser } = require('../controllers/user');
 const { getUsersById } = require('../controllers/user');
+const { updateUser } = require('../controllers/user');
 const { deleteUser } = require('../controllers/user');
 
 // вернуть всех пользователей
@@ -14,6 +15,9 @@ router.post('/users', createUser);
 
 // вернуть пользователя по id
 router.get('/users/:id', getUsersById);
+
+// обновить пользователя
+router.patch('/users/:id', updateUser);
 
 // удалить пользователя по id
 router.delete('/users/:id', deleteUser);
