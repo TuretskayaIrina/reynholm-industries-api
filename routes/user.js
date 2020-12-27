@@ -7,19 +7,24 @@ const { getUsersById } = require('../controllers/user');
 const { updateUser } = require('../controllers/user');
 const { deleteUser } = require('../controllers/user');
 
+const { validateСreateUser } = require('../middlewares/validateJoi');
+const { validateDeleteUser } = require('../middlewares/validateJoi');
+const { validateGetUsersById } = require('../middlewares/validateJoi');
+const { validateUpdateUser } = require('../middlewares/validateJoi');
+
 // вернуть всех пользователей
 router.get('/users', getAllUsers);
 
 // создать пользователя
-router.post('/users', createUser);
+router.post('/users', validateСreateUser, createUser);
 
 // вернуть пользователя по id
-router.get('/users/:id', getUsersById);
+router.get('/users/:id', validateGetUsersById, getUsersById);
 
 // обновить пользователя
-router.patch('/users/:id', updateUser);
+router.patch('/users/:id', validateUpdateUser, updateUser);
 
 // удалить пользователя по id
-router.delete('/users/:id', deleteUser);
+router.delete('/users/:id', validateDeleteUser, deleteUser);
 
 module.exports = router;
