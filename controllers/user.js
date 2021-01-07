@@ -6,7 +6,7 @@ const ValidationError = require('../errors/Validation-error');
 const getAllUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
-      res.status(200).send({ data: users });
+      res.status(200).send(users);
     })
     .catch((err) => next(err));
 };
@@ -40,7 +40,7 @@ const createUser = (req, res, next) => {
     })
 
     .then((user) => {
-      res.status(200).send({ data: user });
+      res.status(200).send(user);
     })
 
     .catch((err) => next(err));
@@ -53,7 +53,7 @@ const getUsersById = (req, res, next) => {
       if (user === null || undefined) {
         throw new NotFoundError(`Пользователь с id ${req.params.id} не существует`);
       } else {
-        res.status(200).send({ data: user });
+        res.status(200).send(user);
       }
     })
     .catch((err) => next(err));
@@ -100,7 +100,7 @@ const deleteUser = (req, res, next) => {
       if (!user) {
         throw new NotFoundError(`Пользователь с id ${req.params.id} не существует`);
       } else {
-        res.status(200).send({ data: user });
+        res.status(200).send(user);
       }
     })
     .catch((err) => next(err));

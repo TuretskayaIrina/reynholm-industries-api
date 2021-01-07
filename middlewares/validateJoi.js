@@ -30,12 +30,13 @@ const validateСreateUser = celebrate({
         'string.max': 'Минимальная длина поля "profession" 30 символов!',
       }),
     relocation: Joi.boolean(),
-    adress: Joi.string().required().min(2).max(80)
-      .messages({
-        'any.required': 'Поле "adress" обязательно для заполнения!',
-        'string.min': 'Минимальная длина поля "adress" 2 символа!',
-        'string.max': 'Минимальная длина поля "adress" 80 символов!',
-      }),
+    // adress: Joi.string().required().min(2).max(80)
+    //   .messages({
+    //     'any.required': 'Поле "adress" обязательно для заполнения!',
+    //     'string.min': 'Минимальная длина поля "adress" 2 символа!',
+    //     'string.max': 'Минимальная длина поля "adress" 80 символов!',
+    //   }),
+    adress: Joi.string(),
   }),
 });
 

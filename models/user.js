@@ -29,10 +29,11 @@ const userSchema = new mongoose.Schema({
   },
   relocation: {
     type: Boolean, // тип данных - логическое: true или false
+    default: false,
   },
   adress: {
     type: String, // тип данных - строка
-    required: true, // поле обязательно для заполнения
+    // required: true, // поле обязательно для заполнения
     minlength: 2, // минимальная длина — 2 символа
     maxlength: 80, // максимальная длина - 80 символов
   },
