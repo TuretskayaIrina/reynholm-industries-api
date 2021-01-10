@@ -60,48 +60,60 @@ const getUsersById = (req, res, next) => {
 };
 
 // обновить пользователя
+// const updateUser = (req, res, next) => {
+//   const {
+//     avatar,
+//     firstName,
+//     lastName,
+//     birthday,
+//     profession,
+//     relocation,
+//     adress,
+//   } = req.body;
+//   User.findByIdAndUpdate(req.params.id, {
+//     avatar,
+//     firstName,
+//     lastName,
+//     birthday,
+//     profession,
+//     relocation,
+//     adress,
+//   }, {
+//     new: true,
+//     runValidators: true,
+//   })
+//     .catch((err) => {
+//       if (err.name === 'ValidationError') {
+//         throw new ValidationError('Ошибка валидации');
+//       }
+//     })
+//     .then((user) => {
+//       res.status(200).send({ data: user });
+//     })
+//     .catch((err) => next(err));
+// };
+
 const updateUser = (req, res, next) => {
-  const {
-    avatar,
-    firstName,
-    lastName,
-    birthday,
-    profession,
-    relocation,
-    adress,
-  } = req.body;
-  User.findByIdAndUpdate(req.params.id, {
-    avatar,
-    firstName,
-    lastName,
-    birthday,
-    profession,
-    relocation,
-    adress,
-  }, {
+  const { firstName, lastName } = req.body;
+  console.log('============================');
+  console.log(req.body);
+  console.log('============================');
+
+  User.findByIdAndUpdate(req.params.id, { firstName, lastName }, {
     new: true,
     runValidators: true,
   })
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        throw new ValidationError('Ошибка валидации');
-      }
-    })
     .then((user) => {
-      res.status(200).send({ data: user });
+      res.status(200).send(user);
     })
     .catch((err) => next(err));
 };
 
-// удаляет пользователя по id
-const deleteUser = (req, res, next) => {
-  User.findByIdAndRemove(req.params.id)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError(`Пользователь с id ${req.params.id} не существует`);
-      } else {
-        res.status(200).send(user);
-      }
+// удаляет пользователей по id
+const deleteUsers = (req, response, next) => {
+  User.deleteMany({ _id: { $in: req.body.userIds } })
+    .then((result) => {
+      response.status(200).send(result);
     })
     .catch((err) => next(err));
 };
@@ -111,5 +123,5 @@ module.exports = {
   createUser,
   getUsersById,
   updateUser,
-  deleteUser,
+  deleteUsers,
 };

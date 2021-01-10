@@ -41,11 +41,11 @@ const validateСreateUser = celebrate({
 });
 
 // валидация удаления пользователя
-const validateDeleteUser = celebrate({
-  params: Joi.object().keys({
-    id: Joi.string().required().hex().length(24),
-  }),
-});
+// const validateDeleteUser = celebrate({
+//   params: Joi.object().keys({
+//     id: Joi.string().required().hex().length(24),
+//   }),
+// });
 
 // валидация запроса пользователя по id
 const validateGetUsersById = celebrate({
@@ -63,7 +63,7 @@ const validateUpdateUser = celebrate({
 
 module.exports = {
   validateСreateUser,
-  validateDeleteUser,
+  // validateDeleteUser,
   validateGetUsersById,
   validateUpdateUser,
 };
