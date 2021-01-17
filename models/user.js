@@ -1,5 +1,20 @@
 const mongoose = require('mongoose');
 
+const adressSchema = new mongoose.Schema({
+  city: {
+    type: String,
+  },
+  street: {
+    type: String,
+  },
+  home: {
+    type: String,
+  },
+  apartment: {
+    type: String,
+  },
+});
+
 const userSchema = new mongoose.Schema({
   avatar: {
     type: String, // тип данных - строка
@@ -31,12 +46,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean, // тип данных - логическое: true или false
     default: false,
   },
-  adress: {
-    type: String, // тип данных - строка
-    // required: true, // поле обязательно для заполнения
-    minlength: 2, // минимальная длина — 2 символа
-    maxlength: 80, // максимальная длина - 80 символов
-  },
+  adress: adressSchema,
 });
 
 module.exports = mongoose.model('user', userSchema);

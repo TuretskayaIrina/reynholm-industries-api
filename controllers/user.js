@@ -13,24 +13,13 @@ const getAllUsers = (req, res, next) => {
 
 // создать пользователя
 const createUser = (req, res, next) => {
-  const {
-    avatar,
-    firstName,
-    lastName,
-    birthday,
-    profession,
-    relocation,
-    adress,
-  } = req.body;
-
   User.create({
-    avatar,
-    firstName,
-    lastName,
-    birthday,
-    profession,
-    relocation,
-    adress,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    birthday: req.body.birthday,
+    profession: req.body.profession,
+    relocation: req.body.relocation,
+    adress: req.body.adress,
   })
 
     .catch((err) => {
@@ -60,46 +49,15 @@ const getUsersById = (req, res, next) => {
 };
 
 // обновить пользователя
-// const updateUser = (req, res, next) => {
-//   const {
-//     avatar,
-//     firstName,
-//     lastName,
-//     birthday,
-//     profession,
-//     relocation,
-//     adress,
-//   } = req.body;
-//   User.findByIdAndUpdate(req.params.id, {
-//     avatar,
-//     firstName,
-//     lastName,
-//     birthday,
-//     profession,
-//     relocation,
-//     adress,
-//   }, {
-//     new: true,
-//     runValidators: true,
-//   })
-//     .catch((err) => {
-//       if (err.name === 'ValidationError') {
-//         throw new ValidationError('Ошибка валидации');
-//       }
-//     })
-//     .then((user) => {
-//       res.status(200).send({ data: user });
-//     })
-//     .catch((err) => next(err));
-// };
-
 const updateUser = (req, res, next) => {
-  const { firstName, lastName } = req.body;
-  console.log('============================');
-  console.log(req.body);
-  console.log('============================');
-
-  User.findByIdAndUpdate(req.params.id, { firstName, lastName }, {
+  User.findByIdAndUpdate(req.params.id, {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    birthday: req.body.birthday,
+    profession: req.body.profession,
+    relocation: req.body.relocation,
+    adress: req.body.adress,
+  }, {
     new: true,
     runValidators: true,
   })

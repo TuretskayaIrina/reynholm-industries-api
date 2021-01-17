@@ -7,7 +7,7 @@ const { getUsersById } = require('../controllers/user');
 const { updateUser } = require('../controllers/user');
 const { deleteUsers } = require('../controllers/user');
 
-const { validateСreateUser } = require('../middlewares/validateJoi');
+// const { validateСreateUser } = require('../middlewares/validateJoi');
 // const { validateDeleteUser } = require('../middlewares/validateJoi');
 const { validateGetUsersById } = require('../middlewares/validateJoi');
 // const { validateUpdateUser } = require('../middlewares/validateJoi');
@@ -16,7 +16,8 @@ const { validateGetUsersById } = require('../middlewares/validateJoi');
 router.get('/users', getAllUsers);
 
 // создать пользователя
-router.post('/users', validateСreateUser, createUser);
+// router.post('/users', validateСreateUser, createUser);
+router.post('/users', createUser);
 
 // вернуть пользователя по id
 router.get('/users/:id', validateGetUsersById, getUsersById);

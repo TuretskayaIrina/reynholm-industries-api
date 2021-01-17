@@ -36,7 +36,7 @@ const validateСreateUser = celebrate({
     //     'string.min': 'Минимальная длина поля "adress" 2 символа!',
     //     'string.max': 'Минимальная длина поля "adress" 80 символов!',
     //   }),
-    adress: Joi.string(),
+    // adress: Joi.string(),
   }),
 });
 
