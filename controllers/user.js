@@ -1,3 +1,4 @@
+// const fs = require('fs');
 const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-err');
 const ValidationError = require('../errors/Validation-error');
@@ -13,7 +14,21 @@ const getAllUsers = (req, res, next) => {
 
 // создать пользователя
 const createUser = (req, res, next) => {
+  const filedata = req.file;
+
+  console.log('==============');
+  console.log(filedata);
+  // console.log(req);
+  console.log('==============');
+
+  // if (!filedata) {
+  //   res.send('Ошибка при загрузке файла');
+  // } else {
+  //   res.send('Файл загружен');
+  // }
+
   User.create({
+    avatar: req.file.path,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     birthday: req.body.birthday,
@@ -24,7 +39,7 @@ const createUser = (req, res, next) => {
 
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        throw new ValidationError('Заполните обязательные поля: firstName, lastName, birthday, profession, adress');
+        throw new ValidationError('Ошибка валидации');
       }
     })
 

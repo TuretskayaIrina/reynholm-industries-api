@@ -3,6 +3,8 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const multer = require('multer');
+const path = require('path');
 const getUsers = require('./routes/user');
 const { limiter } = require('./middlewares/rateLimiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -34,6 +36,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // подключаем логгер запросов
 app.use(requestLogger);
+
+// set storage
+const storageConfig = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+app.use(multer({ storage: storageConfig }).single('avatar'));
+app.use('/uploads', express.static(path.join('uploads')));
 
 app.use('/', getUsers);
 

@@ -18,7 +18,6 @@ const adressSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   avatar: {
     type: String, // тип данных - строка
-    minlength: 2,
   },
   firstName: {
     type: String, // тип данных - строка
